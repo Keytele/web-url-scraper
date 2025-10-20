@@ -65,8 +65,12 @@ def canonical(u: str) -> str:
 
 filtered = sorted({canonical(u) for u in get_urls(data_json) if needle in u.lower()})
 
-if filtered:
-    for url in filtered:
-        print(url)
-else:
-    print(f"No links found for /r/{target_sub}/ in that JSON.")
+with open("links.txt", "a") as f:
+    if filtered:
+        for url in filtered:
+            print(url, file=f)
+    else:
+        print(f"No links found for /r/{target_sub}/ in that JSON.")
+        
+        
+print("Your links have been saved to links.txt!")
